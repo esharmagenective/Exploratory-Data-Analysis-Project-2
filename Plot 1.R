@@ -12,5 +12,5 @@ colnames(sums)<-c("Sum")
 sums<-cbind(sums,Year=c(1999,2002,2005,2008))
 
 png("plot1.png")
-barplot(sums$Sum, names.arg = sums$Year, xlab = "Year", ylab = "Total PM2.5 Emission", main = "Total PM2.5 Emission by Year", col = "darkblue")
+barplot(sums$Sum, names.arg = sums$Year, xlab = "Year", ylab = "Total PM2.5 Emission (tons)", main = "Total PM2.5 Emission by Year", col = "darkblue")
 dev.off()
