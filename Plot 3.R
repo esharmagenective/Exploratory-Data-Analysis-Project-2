@@ -63,10 +63,11 @@ c<-ggplot(onroadsums,aes(Year,Sum))
 plot3<-c+geom_col(fill="darkgreen")+labs(y="Sum of PM2.5 Emissions (tons)", title = "Emissions caused by On-Road Sources by Year in Baltimore")+theme(plot.title = element_text(size = 10))
 
 d<-ggplot(nonroadsums,aes(Year,Sum))
-plot4<-d+geom_col(fill="darkred")+labs(y="Sum of PM2.5 Emissions (tons)", title = "Emissions caused by Non-Road Sources by Year in Baltimore")+theme(plot.title = element_text(size = 10))
+plot4<-d+geom_col(fill="darkblue")+labs(y="Sum of PM2.5 Emissions (tons)", title = "Emissions caused by Non-Road Sources by Year in Baltimore")+theme(plot.title = element_text(size = 10))
 
 library(cowplot)
+png("plot3.png")
 plot_grid(plot1,plot2,plot3,plot4,ncol=2,nrow=2)
-?plot_grid
+dev.off()
 
 
