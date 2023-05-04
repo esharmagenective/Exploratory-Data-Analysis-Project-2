@@ -1,1 +1,23 @@
 #How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City?
+
+motor<-subset(SCC, SCC.Level.One=="Mobile Sources")
+motorscc<-motor$SCC
+motorscc<-as.character(motorscc)
+motorscc<-as.numeric(motorscc)
+
+library(dplyr)
+NEImotor<-filter(NEI,NEI$SCC %in% motorscc)
+Balt<-subset(NEImotor,fips=="24510")
+
+years<-split(Balt,Balt$year)
+sums<-data.frame()
+for (i in years) {
+    x<-sum(i$Emissions)
+    sums<-rbind(sums,x)
+}
+colnames(sums)<-c("Sum")
+sums<-cbind(sums,Year=c(1999,2002,2005,2008))
+
+png("plot5.png")
+barplot(sums$Sum, names.arg = sums$Year, xlab = "Year", ylab = "Total PM2.5 Emission (tons)", main = "Baltimore Emissions by Motor Vehicle Sources", col = "darkblue")
+dev.off()
