@@ -2,18 +2,20 @@
 #sources in Los Angeles County, California (fips == "06037"). 
 #Which city has seen greater changes over time in motor vehicle emissions?
 
-
+#subset SSC by motor sources and separate out the SSC numbers
 motor<-subset(SCC, SCC.Level.One=="Mobile Sources")
 motorscc<-motor$SCC
 motorscc<-as.character(motorscc)
 motorscc<-as.numeric(motorscc)
 
+#Filter NEI by motor SCC numbers
 library(dplyr)
 NEImotor<-filter(NEI,NEI$SCC %in% motorscc)
 
-# Baltimore
+# Baltimore subset
 Balt<-subset(NEImotor,fips=="24510")
 
+#sum Baltimore emissions
 Byears<-split(Balt,Balt$year)
 Bsums<-data.frame()
 for (i in Byears) {
@@ -24,9 +26,10 @@ colnames(Bsums)<-c("Sum")
 Bsums<-cbind(Bsums,Year=c(1999,2002,2005,2008))
 
 
-# Baltimore
+# Los Angeles subset
 LAC<-subset(NEImotor,fips=="06037")
 
+#sum Los Angeles emissions
 Lyears<-split(LAC,LAC$year)
 Lsums<-data.frame()
 for (i in Lyears) {
@@ -36,6 +39,7 @@ for (i in Lyears) {
 colnames(Lsums)<-c("Sum")
 Lsums<-cbind(Lsums,Year=c(1999,2002,2005,2008))
 
+#graph
 library(ggplot2)
 
 a<-ggplot(Bsums,aes(Year,Sum))

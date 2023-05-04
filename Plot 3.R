@@ -4,13 +4,14 @@
 #Which have seen increases in emissions from 1999–2008? 
 #Use the ggplot2 plotting system to make a plot answer this question.
 
+#make a subset for each source
 point<-subset(NEI,type=="POINT")
 nonpoint<-subset(NEI,type=="NONPOINT")
 onroad<-subset(NEI,type=="ON-ROAD")
 nonroad<-subset(NEI,type=="NON-ROAD")
 head(nonroad)
 
-# point
+# code for summarizing point emmissions
 pointyears<-split(point,point$year)
 pointsums<-data.frame()
 for (i in pointyears) {
@@ -20,7 +21,7 @@ for (i in pointyears) {
 colnames(pointsums)<-c("Sum")
 pointsums<-cbind(pointsums,Year=c("1999","2002","2005","2008"))
 
-# nonpoint
+# code for summarizing nonpoint emmissions
 nonpointyears<-split(nonpoint,nonpoint$year)
 nonpointsums<-data.frame()
 for (i in nonpointyears) {
@@ -30,7 +31,7 @@ for (i in nonpointyears) {
 colnames(nonpointsums)<-c("Sum")
 nonpointsums<-cbind(nonpointsums,Year=c("1999","2002","2005","2008"))
 
-# onroad
+# code for summarizing onroad emmissions
 onroadyears<-split(onroad,onroad$year)
 onroadsums<-data.frame()
 for (i in onroadyears) {
@@ -40,7 +41,7 @@ for (i in onroadyears) {
 colnames(onroadsums)<-c("Sum")
 onroadsums<-cbind(onroadsums,Year=c("1999","2002","2005","2008"))
 
-# nonroad
+# code for summarizing onroad emmissions
 nonroadyears<-split(nonroad,nonroad$year)
 nonroadsums<-data.frame()
 for (i in nonroadyears) {
